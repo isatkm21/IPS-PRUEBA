@@ -1,0 +1,2 @@
+C:\Taller\IPS-PRUEBA\DAL\obj\Debug\DAL.csproj.AssemblyReference.cache
+C:\Taller\IPS-PRUEBA\DAL\obj\Debug\DAL.csproj.CoreCompileInputs.cache

@@ -62,7 +62,51 @@ namespace GUI
         }
         static void Registrarliquidacion()
         {
+            Console.WriteLine("Ingrese los datos de la liquidacion que desea registrar");
+            Console.Write("Numero de la liquidación=> ");
+            int numeroliquidacion = int.Parse(Console.ReadLine());
 
+            Console.WriteLine("Identificación del paciente=> ");
+            string idpaciente = Console.ReadLine();
+            Console.Write("Tipo de afiliación (Contributivo o Subsidiado)=> ");
+            string tipoafiliacion = Console.ReadLine();
+            Console.Write("Salario devengado del paciente=> ");
+            decimal salariodevengado = decimal.Parse(Console.ReadLine());
+            Console.Write("Valor del servicio de hospitalización prestado=> ");
+            decimal valorservicio = decimal.Parse(Console.ReadLine());
+
+            Liquidacioncuotamoderadora liquidacion = new Liquidacioncuotamoderadora
+            {
+                Numeroliquidacion = numeroliquidacion,
+                Idpaciente = idpaciente,
+                Tipoafiliacion = tipoafiliacion,
+                Salariodevengado = salariodevengado,
+                Valorservicio = valorservicio
+            };
+
+            liquidacion.Calcularcuotamoderadora();
+            LiquidacionCuotaModeradoraBLL(liquidacion);
+
+            Console.WriteLine("La liquidación ha sido registrada correctamente");
+        }
+
+        static void Consultarliquidaciones()
+        {
+            List<Liquidacioncuotamoderadora> liquidaciones = LiquidacionCuotaModeradoraBLL.Consultarliquidaciones();
+            Console.WriteLine("Listado de liquidaciones");
+            foreach (var liquidacion in liquidaciones)
+            {
+                Console.WriteLine($"Numero de liquidación: {liquidacion.Numeroliquidacion}");
+                Console.WriteLine($"Identificacion del paciente: {liquidacion.Idpaciente}");
+                Console.WriteLine($"Tipo de afiliacion del paciente: {liquidacion.Tipoafiliacion}");
+                Console.WriteLine($"Salario devengado del paciente: {liquidacion.Salariodevengado:C}");
+                Console.WriteLine($"Valor dell servicio brindado: {liquidacion.Valorservicio:C}");
+                Console.WriteLine($"Tarifa: {liquidacion.Tarifa:P}");
+                Console.WriteLine($"Numero de liquidación: {liquidacion.ValorCuotaModeradora:C}");
+                Console.WriteLine($"Numero de liquidación: {(liquidacion.AplicoTopeMaximo? "Si" :"No")}");
+                Console.WriteLine($"Numero de liquidación: {liquidacion.ValorTopeMaximo:C}");
+                Console.WriteLine();
+            }
         }
      }
 }
